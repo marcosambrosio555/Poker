@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    font-family: monospace;
+    outline: none;
+}
+
+html {
+    font-size: 62.5%;
+    overflow: hidden;
+}
+
+body {
+    background-color: #121224;
+    color: #eef;
+    font-size: 1.6rem;
+    height: 100vh;
+}
+
+.container {
+    padding: 0 1.2rem;
+    margin: 0 auto;
+    max-width: 768px;
+}
+
+button {
+    cursor: pointer;
+    transition: .4s;
+}
+
+label {
+    display: block;
+    font-size: 2rem;
+}

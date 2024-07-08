@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poker Tour</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/game.css">
+</head>
+
+<body>
+    <main class="main">
+        <div class="container">
+            <h2>Poker Tour</h2>
+            <div class="content-board">
+                <div>
+                    <div class="player player-2">
+                        <div class="function"></div>
+                        <div class="name"></div>
+                        <div class="amount"></div>
+                        <div class="cards"></div>
+                        <div class="placing"></div>
+                    </div>
+                    <div class="player player-3">
+                        <div class="function"></div>
+                        <div class="name"></div>
+                        <div class="amount"></div>
+                        <div class="cards"></div>
+                        <div class="placing"></div>
+                    </div>
+                </div>
+                <div class="board">
+                    <h3 class="stage"></h3>
+                    <div class="cards"></div>
+                    <div class="pot"></div>
+                </div>
+                <div>
+                    <div class="player player-1">
+                        <div class="function"></div>
+                        <div class="name"></div>
+                        <div class="amount"></div>
+                        <div class="cards"></div>
+                        <div class="placing"></div>
+                    </div>
+                    <div class="player myPlayer">
+                        <div class="function"></div>
+                        <div class="name"></div>
+                        <div class="amount"></div>
+                        <div class="cards"></div>
+                        <div class="placing"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="options disable">
+                <div class="amount"></div>
+
+                <div class="row">
+                    <div class="box box-raise">
+                        <input type="number" value="" class="value" step="100" min="0">
+                        <button class="btn-raise">Raise</button>
+                    </div>
+                    <div class="box box-check">
+                        <button class="btn-all-in">All in</button>
+                        <button class="btn-check">Check</button>
+                    </div>
+                    <div class="box box-fold">
+                        <button class="btn-fold">Fold</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="./js/script.js" type="module"></script>
+</body>
+
+</html>
