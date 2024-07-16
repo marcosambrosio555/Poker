@@ -35,7 +35,7 @@ export const data = {
         showDownTurn,
     ],
     // speed: 500,
-    speed: 6000 / speedValue,
+    speed: 12000 / speedValue,
     allCards: [],
     cardsOnBoard: [],
     folders: [],
