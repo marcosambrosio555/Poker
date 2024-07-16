@@ -17,6 +17,7 @@ body {
     color: #eef;
     font-size: 1.6rem;
     height: 100vh;
+    overflow-y: hidden;
 }
 
 .container {

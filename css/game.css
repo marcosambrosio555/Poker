@@ -20,7 +20,7 @@ h2 {
 .board {
     background-color: #7878aa;
     height: 29rem;
-    width: 70%;
+    width: 80%;
     margin: auto;
     max-width: 36rem;
     display: flex;
@@ -222,14 +222,14 @@ h2 {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.1);
     transition: 2s;
 }
 
 .options .row {
     display: grid;
     justify-content: space-around;
-    grid-template-columns: repeat(3, 120px);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
 }
 
@@ -298,6 +298,9 @@ h2 {
     border: 1px solid #ccc;
     padding: 1.8rem 1rem;
     transition: 2s transform;
+    width: 40px;
+    font-size: 1.4rem;
+    text-wrap: nowrap;
 }
 
 
