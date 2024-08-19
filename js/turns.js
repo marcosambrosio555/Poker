@@ -1,5 +1,4 @@
 const stageName = document.querySelector(".board .stage")
-
 import createHandFunction from "./createHandFunction.js";
 import findWinnerRound from "./findWinnerRound.js";
 import returnCard from "./returnCard.js";
@@ -17,7 +16,6 @@ function flopTurn() {
 
     data.turnName = "Flop"
     stageName.innerText = "Flop"
-
 
     for (let i = 0; i < 3; i++) {
         const card = returnCard();
@@ -46,7 +44,6 @@ function riverTurn() {
     data.turnName = "River"
     stageName.innerText = "River"
 
-
     const card = returnCard();
 
     data.cardsOnBoard.push(card)
@@ -59,6 +56,11 @@ function showDownTurn() {
 
     data.turnName = "Show down"
     stageName.innerText = "Show down"
+
+    // Create Hand 
+    data.allPlayers.map(player => {
+        player.hand = createHandFunction(player.cards)
+    })
 
     // Rotate cards
     data.allPlayers.map(player => {
@@ -74,8 +76,7 @@ function showDownTurn() {
     })
 
     setTimeout(() => {
-        createHandFunction()
-        putHandOnPlacing()
+        putHandNameOnPlacing()
         setTimeout(() => {
             findWinnerRound()
         }, 1000)
@@ -83,8 +84,7 @@ function showDownTurn() {
 
 }
 
-
-function putHandOnPlacing() {
+function putHandNameOnPlacing() {
     data.allPlayers.map(player => {
         player.html.querySelector(".placing").innerText = player.hand.name;
     })

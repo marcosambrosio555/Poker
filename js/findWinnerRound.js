@@ -38,40 +38,41 @@ function findWinnerRound() {
 
     if (arrayBestHand.length === 1) {
         winnerFunction(arrayBestHand[0])
-
     } else {
         lastTierBreakerFinal(arrayBestHand)
     }
 
 
     function lastTierBreakerFinal(players) {
-        console.log("Desempate")
 
-        players.map(player => {
-            for (let i = 0; i < 5; i++) {
-                let points = (Number(orderList.indexOf(player.hand.order[i])) + 1.125) * 1.2655
-                player.points += points;
-            }
-        })
-
-        let maxPoints = 0;
         let winners = [];
 
-        players.map(player => {
-            if (player.points >= maxPoints) {
-                if (player.points > maxPoints) {
-                    winners = []
-                }
-                maxPoints = player.points;
-                winners.push(player);
-            }
-        })
+        for (let i = 0; i < 5; i++) {
 
-        if (winners.length === 1) {
-            winnerFunction(winners[0])
-        } else {
-            multiplyWinners(winners)
+            winners = []
+            let maxPoints = -1;
+
+            players.map(player => {
+                let points = Number(orderList.indexOf(player.hand.order[i]))
+                if (points > maxPoints) {
+                    maxPoints = points
+                    winners = []
+                    winners.push(player)
+                } else if (points === maxPoints) {
+                    winners.push(player)
+                }
+            })
+
+            if (winners.length === 1) {
+                winnerFunction(winners[0])
+                break;
+            } else {
+                players = [...winners]
+            }
+
         }
+
+        multiplyWinners(winners)
 
     }
 
@@ -86,8 +87,6 @@ export function winnerFunction(player) {
 
     data.potValue = 0;
     updatePot()
-
-    console.log("Vencedor : " + player.name)
 
     setTimeout(() => {
         initRound()
@@ -112,6 +111,5 @@ function multiplyWinners(players) {
         initRound()
     }, 5000)
 }
-
 
 export default findWinnerRound;

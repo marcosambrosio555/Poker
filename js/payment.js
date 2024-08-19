@@ -10,12 +10,12 @@ function payment(object, value) {
     let amountPayed;
 
     if (amountToPay > object.amount) {
-        console.log("Caso o valor é maior que o meu dinheiro")
+        // console.log("Caso o valor é maior que o meu dinheiro")
         amountPayed = object.amount;
         object.placing += amountPayed
         object.amount = 0;
     } else {
-        console.log("Caso tenha dinheiro suficiente")
+        // console.log("Caso tenha dinheiro suficiente")
         object.amount -= amountToPay
         amountPayed = amountToPay
         object.placing += amountToPay

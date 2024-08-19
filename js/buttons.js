@@ -10,10 +10,9 @@ const btnAllIn = document.querySelector(".btn-all-in")
 
 const raiseValue = document.querySelector(".box-raise .value")
 
-
 btnCheck.addEventListener("click", () => {
 
-    optionsToggle()
+    disableOptions()
 
     const object = data.myPlayer;
     const value = data.higherValue;
@@ -50,7 +49,7 @@ btnRaise.addEventListener("click", () => {
         return;
     }
 
-    optionsToggle()
+    disableOptions()
 
     const object = data.myPlayer;
     const value = Number(raiseValue.value)
@@ -60,6 +59,8 @@ btnRaise.addEventListener("click", () => {
     data.allPlayers.map(player => {
         player.status = ""
     })
+
+    raiseValue.value = 0
 
     object.status = "check"
 
@@ -71,13 +72,15 @@ btnRaise.addEventListener("click", () => {
 
 btnFold.addEventListener("click", () => {
 
+    disableOptions()
+
     const object = data.myPlayer;
 
     foldFunction(object)
 
     object.status = "check"
 
-    optionsToggle()
+    disableOptions()
 
     changePlayer()
 
@@ -87,7 +90,7 @@ btnFold.addEventListener("click", () => {
 
 btnAllIn.addEventListener("click", () => {
 
-    optionsToggle()
+    disableOptions()
 
     const object = data.myPlayer;
 
@@ -108,7 +111,7 @@ btnAllIn.addEventListener("click", () => {
 function myDecision() {
 
     // Habilitar opções
-    optionsToggle()
+    ableOptions()
 
     // Atualizar valor do raise
     raiseValue.value = data.higherValue + 100;
@@ -123,8 +126,12 @@ function myDecision() {
 
 }
 
-function optionsToggle() {
-    document.querySelector(".options").classList.toggle("disable")
+function ableOptions() {
+    document.querySelector(".options").classList.remove("disable")
+}
+
+function disableOptions() {
+    document.querySelector(".options").classList.add("disable")
 }
 
 export { myDecision }

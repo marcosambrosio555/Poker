@@ -96,7 +96,6 @@ function eliminateWhoLoses() {
 
 function verificationIfHasChampions() {
     if (data.allPlayers.length === 1) {
-
         const player = data.allPlayers[0]
         console.log("Temos um campeão")
         console.log("Campeão é " + player.name)

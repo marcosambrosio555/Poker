@@ -21,6 +21,7 @@ const speedValue = speed >= 1 && speed <= 6 ? speed : 3
 export const data = {
     ...createPlayers(name, numberOfOponents, amount),
     potValue: 0,
+    initialAmount: Number(amount),
     target: 0,
     smallBlind: smallBlind,
     bigBlind: bigBlind,
@@ -34,7 +35,7 @@ export const data = {
         riverTurn,
         showDownTurn,
     ],
-    // speed: 500,
+    // speed: 0,
     speed: 12000 / speedValue,
     allCards: [],
     cardsOnBoard: [],
@@ -67,7 +68,6 @@ function initRound() {
 }
 
 function require() {
-
     if (data.allPlayers.length === 1) {
         winnerFunction(data.allPlayers[0])
     } else if (everyOnePayed()) {
@@ -81,29 +81,33 @@ function require() {
 
             cleanPlayers()
 
-            data.allPlayers.map(player => {
-                player.html.classList.remove("selected")
-            })
+            document.querySelector(".content-board .player.selected").classList.remove("selected")
 
             if (!data.allPlayers[data.smallBlindIndex]) {
                 console.log("Recurso")
                 data.smallBlindIndex = 0
-
             }
 
             data.target = data.smallBlindIndex;
 
             data.allPlayers[data.target].html.classList.add("selected")
 
-            setTimeout(() => {
-                require()
-            }, data.speed)
+            require()
 
         }
 
     } else {
 
         const player = data.allPlayers[data.target].myPlayer
+        const object = data.allPlayers[data.target]
+
+
+        if (object.amount === 0) {
+            object.status = "check"
+            changePlayer();
+            require();
+            return;
+        }
 
         if (player) {
             myDecision()

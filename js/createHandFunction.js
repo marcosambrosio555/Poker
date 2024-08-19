@@ -1,67 +1,61 @@
 import { data } from "./script.js";
 
-function createHandFunction() {
+function createHandFunction(cards) {
 
     const cardsOnBoard = [...data.cardsOnBoard]
 
-    data.allPlayers.map(player => {
-        const cardsPLayers = [...player.cards]
-        player.hand = findHand(...cardsPLayers, ...cardsOnBoard)
-    })
+    const hand = findHand(...cards, ...cardsOnBoard)
 
-    data.allPlayers.map(player => {
+    if (hand.flush.isFlush && hand.straight.isStraight) {
 
+        hand.name = "Straight flush"
+        hand.order = hand.straight.order
 
-        if (player.hand.flush.isFlush && player.hand.straight.isStraight) {
+    } else if (hand.equals.name === "Four of kind") {
 
-            player.hand.name = "Straight flush"
-            player.hand.order = player.hand.straight.order
+        handleEquals(hand, "Four of kind")
 
-        } else if (player.hand.equals.name === "Four of kind") {
+    } else if (hand.equals.name === "Full house") {
 
-            handleEquals(player, "Four of kind")
+        handleEquals(hand, "Full house")
 
-        } else if (player.hand.equals.name === "Full house") {
+    } else if (hand.flush.isFlush) {
 
-            handleEquals(player, "Full house")
+        hand.name = "Flush"
+        hand.order = hand.flush.order
+        hand.highCard = hand.flush.highCard
 
-        } else if (player.hand.flush.isFlush) {
+    } else if (hand.straight.isStraight) {
 
-            player.hand.name = "Flush"
-            player.hand.order = player.hand.flush.order
-            player.hand.highCard = player.hand.flush.highCard
+        hand.name = "Straight"
+        hand.order = hand.straight.order.reverse()
+        hand.highCard = hand.straight.highCard
 
-        } else if (player.hand.straight.isStraight) {
+    } else if (hand.equals.name === "Three of kind") {
 
-            player.hand.name = "Straight"
-            player.hand.order = player.hand.straight.order
-            player.hand.highCard = player.hand.straight.highCard
+        handleEquals(hand, "Three of kind")
 
-        } else if (player.hand.equals.name === "Three of kind") {
+    } else if (hand.equals.name === "Two pair") {
 
-            handleEquals(player, "Three of kind")
+        handleEquals(hand, "Two pair")
 
-        } else if (player.hand.equals.name === "Two pair") {
+    } else if (hand.equals.name === "One pair") {
 
-            handleEquals(player, "Two pair")
+        handleEquals(hand, "One pair")
 
-        } else if (player.hand.equals.name === "One pair") {
+    } else if (hand.equals.name === "Highest card") {
 
-            handleEquals(player, "One pair")
+        handleEquals(hand, "Highest card")
 
-        } else if (player.hand.equals.name === "Highest card") {
-
-            handleEquals(player, "Highest card")
-
-        }
-
-    })
-
-    function handleEquals(player, name) {
-        player.hand.name = name
-        player.hand.highCard = player.hand.equals.highCard
-        player.hand.order = player.hand.equals.order
     }
+
+    function handleEquals(hand, name) {
+        hand.name = name
+        hand.highCard = hand.equals.highCard
+        hand.order = hand.equals.order
+    }
+
+    return hand
 
 }
 
@@ -75,9 +69,10 @@ function findHand(...data) {
     })
 
     const isEquals = equalsNumberFunction(numbers)
-    const isFlush = flushFunction(cards)
-    const isStraight = straightFunction(numbers)
 
+    const isFlush = flushFunction(cards)
+
+    const isStraight = straightFunction(numbers)
 
     return {
         equals: isEquals,
@@ -150,7 +145,7 @@ function equalsNumberFunction(numbers) {
 
     let i = 0;
 
-    while (hand.order.length < 5) {
+    while (hand.order.length < numbers.length) {
 
         if (!hand.order.includes(numbers[i])) {
             hand.order.push(numbers[i])
